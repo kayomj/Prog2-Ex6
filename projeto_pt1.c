@@ -10,16 +10,19 @@ int gera(){
 
 void rb(int n)
 {
-   int i, aux;
-   while(n>=0)
+    if(n == 0) 
+        return;
+
+    int i, aux;
     for (i = 0; i < n - 1; i++) {
-        if (vet[i]>vet[i + 1] ){
+        if ( vet[i] > vet[i + 1]){
             aux = vet[i + 1];
-			vet[i + 1] = vet[i];
-        	vet[i] = aux;
+
+        vet[i + 1] = vet[i];
+        vet[i] = aux;
     	}
 	}
-	n - 1;
+    rb(n - 1);
 }
 
 void print(){
@@ -32,7 +35,7 @@ int main(){
 	srand(time(NULL));
 	for(int i=0;i<150;i++){
 		vet[i]=gera();
-		cont++;
+		
 	}
 	print();
 	printf("%d\n", cont);
