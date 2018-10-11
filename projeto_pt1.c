@@ -35,12 +35,29 @@ void salvar_arq(int vet[150]){
 		exit(1);
 	}
 	for(int i=0;i<150;i++){
-		if(fwrite(&vet[i],sizeof(vet),1024,arq)!=1024){
+		if(fwrite(&vet[i],sizeof(vet),1,arq)!=1){
 			printf("ocorreu um erro de escrita no arquivo");
 			exit(1);
 		}
 	}
 	fclose(arq);
+}
+void ler_arq(int *valor){
+	FILE *arq;
+	int num;
+	arq=fopen("texto.txt","rb");
+	if(arq==NULL){
+		printf("problemas para abrir arquivo");
+		exit(1);
+	}
+	do {
+		if(fread(&num,sizeof(int),1,arq)!=1){
+			printf("ocorreu um erro de escrita no arquivo");
+			exit(1);
+		}
+	
+	}while(*valor!=atoa());
+	}
 }
 
 
@@ -53,17 +70,20 @@ void print(int vet[]){
 
 int main(){
 	int vet[150];
-	int cont=0; 
+	int valor;
 	srand(time(NULL));
 	for(int i=0;i<150;i++){
 		vet[i]=gera();
 		
 	}
 	print(vet);
-	printf("%d\n", cont);
 	rb(vet,150);
 	printf("\n---------------------pos ordenacao---------------------\n");
 	print(vet);
 	salvar_arq(vet);
+	printf("digite um valor");
+	scanf("%d",&valor);
+	ler_arq(&valor);
+	
 	return 0;
 }
