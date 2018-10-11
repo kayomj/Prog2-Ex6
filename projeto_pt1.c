@@ -28,18 +28,17 @@ void rb(int vet[], int n)
 
 void salvar_arq(int vet[150]){
 	FILE *arq;
-	arq=fopen("texto.txt","wb");
+	arq=fopen("texto.txt","ab");
 	
 	if(arq==NULL){
 		printf("problemas com abertura do arquivo");
 		exit(1);
 	}
 	for(int i=0;i<150;i++){
-		if(fwrite(&vet[i],1,sizeof(vet[i]),arq)!=1){
-			printf("erro na escrita do arquivo");
+		if(fwrite(&vet[i],sizeof(vet),1024,arq)!=1024){
+			printf("ocorreu um erro de escrita no arquivo");
 			exit(1);
 		}
-	
 	}
 	fclose(arq);
 }
