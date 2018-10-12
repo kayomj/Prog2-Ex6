@@ -42,22 +42,24 @@ void salvar_arq(int vet[150]){
 	}
 	fclose(arq);
 }
-void ler_arq(int *valor){
+void ler_arq(int valor){
 	FILE *arq;
 	int num;
+	int tam;
 	arq=fopen("texto.txt","rb");
 	if(arq==NULL){
 		printf("problemas para abrir arquivo");
 		exit(1);
 	}
-	do {
 		if(fread(&num,sizeof(int),1,arq)!=1){
 			printf("ocorreu um erro de escrita no arquivo");
 			exit(1);
 		}
-	
-	}while(*valor!=atoa());
-	}
+		while(tam=fgetc(arq)!=EOF)
+			if(tam==valor){
+				printf("valor encontrado");
+				return;
+			}
 }
 
 
@@ -83,7 +85,7 @@ int main(){
 	salvar_arq(vet);
 	printf("digite um valor");
 	scanf("%d",&valor);
-	ler_arq(&valor);
+	ler_arq(valor);
 	
 	return 0;
 }
