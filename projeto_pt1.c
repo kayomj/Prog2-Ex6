@@ -31,12 +31,12 @@ void salvar_arq(int vet[150]){
 	arq=fopen("texto.txt","ab");
 	
 	if(arq==NULL){
-		printf("problemas com abertura do arquivo");
+		printf("problemas com abertura do arquivo\n");
 		exit(1);
 	}
 	for(int i=0;i<150;i++){
-		if(fwrite(&vet[i],sizeof(vet),1,arq)!=1){
-			printf("ocorreu um erro de escrita no arquivo");
+		if(fwrite(&vet[i],sizeof(vet[i]),1,arq)!=1){
+			printf("ocorreu um erro de escrita no arquivo\n");
 			exit(1);
 		}
 	}
@@ -48,18 +48,20 @@ void ler_arq(int valor){
 	int tam;
 	arq=fopen("texto.txt","rb");
 	if(arq==NULL){
-		printf("problemas para abrir arquivo");
+		printf("problemas para abrir arquivo\n");
 		exit(1);
 	}
 		if(fread(&num,sizeof(int),1,arq)!=1){
-			printf("ocorreu um erro de escrita no arquivo");
+			printf("ocorreu um erro de escrita no arquivo\n");
 			exit(1);
+		} 
+      	if (valor >= 0 && valor < 150) { 
+        	fseek (arq, valor * sizeof (int), SEEK_SET); 
+        	fread (&tam, sizeof (int), 1, arq);
+			printf("Valor encontrado\n");
+			return;
+
 		}
-		while(tam=fgetc(arq)!=EOF)
-			if(tam==valor){
-				printf("valor encontrado");
-				return;
-			}
 }
 
 
@@ -83,7 +85,7 @@ int main(){
 	printf("\n---------------------pos ordenacao---------------------\n");
 	print(vet);
 	salvar_arq(vet);
-	printf("digite um valor");
+	printf("digite um valor\n");
 	scanf("%d",&valor);
 	ler_arq(valor);
 	
