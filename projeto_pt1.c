@@ -46,22 +46,26 @@ void ler_arq(int valor){
 	FILE *arq;
 	int num;
 	int tam;
+	int cont = 0;
 	arq=fopen("texto.txt","rb");
 	if(arq==NULL){
 		printf("problemas para abrir arquivo\n");
 		exit(1);
 	}
-		if(fread(&num,sizeof(int),1,arq)!=1){
-			printf("ocorreu um erro de escrita no arquivo\n");
-			exit(1);
-		} 
-      	if (valor >= 0 && valor < 150) { 
-        	fseek (arq, valor * sizeof (int), SEEK_SET); 
-        	fread (&tam, sizeof (int), 1, arq);
+	if(fread(&num,sizeof(int),1,arq)!=1){
+		printf("ocorreu um erro de escrita no arquivo\n");
+		exit(1);
+	}
+    while(cont<=150){ 
+       	fseek (arq, cont * sizeof (int), SEEK_SET);
+       	fread (&num, sizeof(int), 1, arq);
+		cont++;
+		if (valor==num){
 			printf("Valor encontrado\n");
 			return;
-
 		}
+	}
+	fclose(arq);
 }
 
 
@@ -91,3 +95,6 @@ int main(){
 	
 	return 0;
 }
+
+//Kayo LG Costa 200611
+//SOlon Mota
